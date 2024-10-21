@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://aws-0-us-east-1.pooler.supabase.com:6543/postgres
+    username: postgres.ecpxxluxzgijypxnslxj
+    password: 83YeHPYzTMHLMbYQ
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    generate-ddl: true
+    show-sql: true
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 50MB
+      max-request-size: 50MB
+  mvc:
+    throw-exception-if-no-handler-found: true
+    async:
+      request-timeout: 3600000
+  server:
+    port: 6543
