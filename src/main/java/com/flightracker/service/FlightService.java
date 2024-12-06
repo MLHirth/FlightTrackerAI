@@ -132,8 +132,8 @@ public class FlightService {
         // Define the region of interest in the image
         int x = 100; // starting x coordinate
         int y = 50;  // starting y coordinate
-        int width = 300; // width of the ROI
-        int height = 100; // height of the ROI
+        int width = 300; // width of the roi
+        int height = 100; // height of the roi
 
         // Extract the roi from the image
         Mat roi = new Mat(image, new org.opencv.core.Rect(x, y, width, height));
@@ -142,10 +142,8 @@ public class FlightService {
     }
 
     private String readImage(Mat image) {
-        // Convert the Mat object to a byte array
-        MatOfByte matOfByte = new MatOfByte();
-        Imgcodecs.imencode(".png", image, matOfByte);
-        byte[] byteArray = matOfByte.toArray();
+        // Convert the Mat object to a BufferedImage
+        BufferedImage bufferedImage = matToBufferedImage(image);
 
         // Initialize Tesseract OCR
         Tesseract tesseract = new Tesseract();
@@ -154,7 +152,7 @@ public class FlightService {
         // Perform OCR on the image
         String extractedFile = "";
         try {
-           extractedFile = tesseract.doOCR(matToBufferedImage(image));
+           extractedFile = tesseract.doOCR(bufferedImage);
         } catch (Exception exception) {
             log.error("could not extract: " + extractedFile, exception);
         }
